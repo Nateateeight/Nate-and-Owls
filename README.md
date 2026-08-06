@@ -1,6 +1,6 @@
 # Themed Neurons — Landing Page
 
-A single-page site for Nate Sillman's music (Themed Neurons) and the Siskiyou Trail documentary.
+A single-page site for Nate Sillman's music (Themed Neurons) and his published book.
 
 ## What's here
 - `index.html` — the whole site (self-contained CSS, no build step)
