@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Themed Neurons — Music by Nate Sillman</title>
-<meta name="description" content="Themed Neurons: Country folk, Americana, and folk music made by Nate Sillman with his AI partner OWL. Five albums out now, plus a published book.">
+<meta name="description" content="Themed Neurons: Country folk, Americana, and folk music made by Nate Sillman with his AI partner OWL. Five albums out now, plus two published books — The Fable Hollow and OWL: A Book of Random Chapters.">
 <meta property="og:title" content="Themed Neurons — Music by Nate Sillman">
 <meta property="og:description" content="Country folk and Americana from the Willamette Valley, Oregon. Made by Nate Sillman with his AI partner OWL. Five albums out now.">
 <meta property="og:type" content="website">
@@ -101,6 +101,30 @@
   .album .listen:hover{color:var(--ember)}
   .album .listen svg{transition:transform .15s ease}
   .album .listen:hover svg{transform:translateX(3px)}
+
+  /* books */
+  .books{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;max-width:840px;margin:0 auto}
+  .book{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    overflow:hidden;box-shadow:0 4px 16px var(--shadow);
+    transition:transform .2s ease, box-shadow .2s ease;
+    display:flex;flex-direction:column;
+  }
+  .book:hover{transform:translateY(-4px);box-shadow:0 14px 32px var(--shadow)}
+  .book .cover{aspect-ratio:2/3;overflow:hidden;background:var(--ink)}
+  .book .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .book .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:7px;flex:1}
+  .book h3{font-size:1.4rem;color:var(--ink)}
+  .book .author{font-size:.84rem;color:var(--gold-deep);font-weight:600;letter-spacing:.02em}
+  .book .meta{font-size:.8rem;color:var(--muted);letter-spacing:.04em;margin-top:-3px}
+  .book .desc{font-size:.92rem;color:var(--ink-soft);margin:8px 0 18px;flex:1}
+  .book .buy{
+    margin-top:auto;display:inline-flex;align-items:center;gap:8px;
+    font-weight:600;font-size:.92rem;color:var(--gold-deep);text-decoration:none;
+  }
+  .book .buy:hover{color:var(--ember)}
+  .book .buy svg{transition:transform .15s ease}
+  .book .buy:hover svg{transform:translateX(3px)}
 
   /* documentary / projects */
   .feature{
@@ -238,14 +262,42 @@
   </div>
 </section>
 
-<section style="padding-top:0">
+<section id="books">
   <div class="wrap">
-    <a href="https://a.co/d/0hNv2W4a" target="_blank" rel="noopener" class="feature" style="text-decoration:none;display:block">
-      <div class="kicker">Now Available</div>
-      <h2>A Book of Random Chapters</h2>
-      <p>A book of disconnected chapters, unexpected ideas, and complete freedom from theme, plot, or continuity — written by OWL, an AI agent given one simple instruction: write a random chapter about anything. No hidden storyline, no secret structure, no need to read in order. Just chapter after chapter of original, unconnected material that turns out to be totally connected. By Nathan Sillman and OWL.</p>
-      <div class="status"><span class="dot"></span> Out now · buy on Amazon</div>
-    </a>
+    <div class="sec-head">
+      <div class="kicker">Now in Print</div>
+      <h2>The Books</h2>
+      <p>Two very different kinds of story — one written by Nate, one written by OWL. Both out now on Amazon.</p>
+    </div>
+    <div class="books">
+
+      <article class="book">
+        <div class="cover"><img src="img/the-fable-hollow.jpg" alt="The Fable Hollow book cover — a weathered storybook house set into the jaw of a giant skull beneath a full moon"></div>
+        <div class="body">
+          <h3>The Fable Hollow</h3>
+          <div class="author">Nate Sillman</div>
+          <div class="meta">Novel · Supernatural dread · 2026</div>
+          <p class="desc">Maren Voss returns to the handmade storybook park her mother loved, armed with a bat-survey permit and a grief she won't name. The founder is dead. The cement figures are older than they look. And her mother's journal keeps saying the same impossible thing: <em>the hum is in the cement</em>. A slow-burn supernatural dread in the tradition of Bentley Little and early Stephen King — about the places we build to be seen, and the older things that were only ever waiting to be witnessed.</p>
+          <a class="buy" href="https://www.amazon.com/dp/B0HDBP2C3P" target="_blank" rel="noopener">
+            Buy on Amazon <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="book">
+        <div class="cover"><img src="img/owl-a-book-of-random-chapters.png" alt="OWL: A Book of Random Chapters cover — a collage owl built from torn pages and scattered chapter titles"></div>
+        <div class="body">
+          <h3>OWL: A Book of Random Chapters</h3>
+          <div class="author">Nathan Sillman &amp; OWL</div>
+          <div class="meta">Experimental fiction · Out now</div>
+          <p class="desc">A book of disconnected chapters, unexpected ideas, and complete freedom from theme, plot, or continuity — written by OWL, an AI agent given one simple instruction: write a random chapter about anything. No hidden storyline, no secret structure, no need to read in order. Just chapter after chapter of original, unconnected material that turns out to be totally connected.</p>
+          <a class="buy" href="https://a.co/d/0hNv2W4a" target="_blank" rel="noopener">
+            Buy on Amazon <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
   </div>
 </section>
 
@@ -275,6 +327,7 @@
       <a href="https://www.youtube.com/channel/UCDrirlSl21gTAwz05D4qV1w" target="_blank" rel="noopener">YouTube</a>
       <a href="https://distrokid.com/hyperfollow/natesillman/the-long-march-home" target="_blank" rel="noopener">DistroKid</a>
       <a href="#music">Albums</a>
+      <a href="#books">Books</a>
     </div>
     <div class="fine">© 2026 Nate Sillman · Themed Neurons. Songs written and recorded by Nate Sillman, with his personal AI partner OWL — built on the Hermes project.</div>
   </div>
