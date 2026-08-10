@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photos & Sketchbook — Themed Neurons</title>
+<meta name="description" content="A growing gallery from Nate Sillman's life — the farm, the family, and sketches from the notebook.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a2018; --ink-soft:#5a4a3a; --muted:#8a7a68;
+    --paper:#f6efe3; --paper-2:#efe5d4; --card:#fffaf1;
+    --gold:#c08a2d; --gold-deep:#9a6817; --amber:#d9a441;
+    --ember:#b8541f; --border:#e0d2bb; --shadow:rgba(60,40,20,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.1;letter-spacing:-0.01em}
+  header.hero{position:relative;padding:88px 0 60px;text-align:center;
+    background:radial-gradient(120% 80% at 50% -10%, rgba(217,164,65,.28), transparent 60%),linear-gradient(180deg,var(--paper-2),var(--paper));
+    border-bottom:1px solid var(--border);overflow:hidden}
+  .hero .label{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:18px}
+  .hero h1{font-size:clamp(2.4rem,7vw,4rem);margin-bottom:14px}
+  .hero p.tag{font-size:clamp(1.02rem,2.3vw,1.22rem);color:var(--ink-soft);max-width:600px;margin:0 auto}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 40px}
+  .sec-head .kicker{font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:12px}
+  .sec-head h2{font-size:clamp(1.9rem,5vw,2.8rem);margin-bottom:10px}
+  .sec-head p{color:var(--ink-soft);font-size:1rem}
+  .back-link{display:inline-block;margin:0 0 8px 24px;color:var(--gold-deep);text-decoration:none;font-weight:500;font-size:.92rem}
+  .back-link:hover{text-decoration:underline}
+
+  .gallery{padding:56px 0 24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+  figure.card{margin:0;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+    box-shadow:0 6px 18px var(--shadow);transition:transform .15s ease, box-shadow .15s ease;cursor:pointer}
+  figure.card:hover{transform:translateY(-4px);box-shadow:0 14px 32px var(--shadow)}
+  figure.card img{width:100%;height:300px;object-fit:cover;display:block;background:var(--paper-2)}
+  figure.card figcaption{padding:14px 16px 16px;font-size:.92rem;color:var(--ink-soft)}
+  figure.card figcaption b{display:block;color:var(--ink);font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;margin-bottom:3px}
+  .family-note{text-align:center;color:var(--muted);font-size:.86rem;margin:40px auto 0;max-width:560px}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(28,19,12,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:24px;cursor:zoom-out}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:88vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .lb .cap{position:absolute;bottom:26px;left:0;right:0;text-align:center;color:#f6efe3;font-size:.95rem;padding:0 24px;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+
+  footer{background:var(--paper-2);border-top:1px solid var(--border);padding:44px 0;text-align:center;margin-top:48px}
+  footer .links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  footer a{color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.95rem}
+  footer a:hover{color:var(--gold-deep)}
+  footer .fine{font-size:.82rem;color:var(--muted);margin-top:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="label">Themed Neurons</div>
+    <h1>Photos &amp; Sketchbook</h1>
+    <p class="tag">The farm, the family, and sketches from the notebook — a page that grows as the years do.</p>
+  </div>
+</header>
+
+<a class="back-link" href="index.html">&larr; Back to music &amp; books</a>
+
+<section class="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">From the Notebook</div>
+      <h2>Sketches &amp; Snapshots</h2>
+      <p>Most are pen-and-ink drawings — Nate's own hand — alongside the occasional snapshot. Click any image to enlarge.</p>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <figure class="card" data-full="img/photo-61fd19f5.jpg" data-cap="Nate, over the years — a boy-scout portrait, drawn from memory.">
+        <img src="img/photo-61fd19f5.jpg" alt="Blue ink drawing of a young boy in a scout uniform" loading="lazy">
+        <figcaption><b>Nate, over the years</b>Scout days — drawn from memory.</figcaption>
+      </figure>
+
+      <figure class="card" data-full="img/photo-00dc9635.jpg" data-cap="Nate, over the years — a childhood portrait in striped shirt.">
+        <img src="img/photo-00dc9635.jpg" alt="Blue ink drawing of a child in a striped shirt" loading="lazy">
+        <figcaption><b>Nate, over the years</b>Kid with a striped shirt.</figcaption>
+      </figure>
+
+      <figure class="card" data-full="img/photo-380ef086.jpg" data-cap="Nate, over the years — lakeside, hoodie and glasses.">
+        <img src="img/photo-380ef086.jpg" alt="Blue ink drawing of a bearded man with glasses by a lake" loading="lazy">
+        <figcaption><b>Nate, over the years</b>Lakeside — hoodie, glasses, the works.</figcaption>
+      </figure>
+
+      <figure class="card" data-full="img/photo-414c3657.jpg" data-cap="Nate, over the years — backward cap, small-town street.">
+        <img src="img/photo-414c3657.jpg" alt="Blue ink drawing of a man in a backward cap on a street" loading="lazy">
+        <figcaption><b>Nate, over the years</b>Backward cap, small-town street.</figcaption>
+      </figure>
+
+      <figure class="card" data-full="img/photo-a736e421.jpg" data-cap="The farm, as imagined — a drawing of the cannabis field out back.">
+        <img src="img/photo-a736e421.jpg" alt="Blue ink drawing of a man among cannabis plants" loading="lazy">
+        <figcaption><b>The Farm, As Imagined</b>The ten acres, drawn the way it feels.</figcaption>
+      </figure>
+
+      <figure class="card" data-full="img/photo-854d4eb9.jpg" data-cap="Nate with his mom and brother — a family portrait in blue ink.">
+        <img src="img/photo-854d4eb9.jpg" alt="Blue ink drawing of a woman and two children" loading="lazy">
+        <figcaption><b>The Family</b>Nate with his mom and brother.</figcaption>
+      </figure>
+
+    </div>
+
+    <p class="family-note">More to come — this page grows as the story does.</p>
+  </div>
+</section>
+
+<div class="lb" id="lb"><img id="lbImg" src="" alt=""><div class="cap" id="lbCap"></div></div>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="index.html">Music &amp; Books</a>
+      <a href="photos.html">Photos</a>
+      <a href="https://music.youtube.com/channel/UCDrirlSl21gTAwz05D4qV1w" target="_blank" rel="noopener">YouTube Music</a>
+      <a href="https://www.youtube.com/channel/UCDrirlSl21gTAwz05D4qV1w" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="fine">© 2026 Nate Sillman · Themed Neurons.</div>
+  </div>
+</footer>
+
+<script>
+  const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+  document.querySelectorAll('figure.card').forEach(f=>{
+    f.addEventListener('click',()=>{
+      lbImg.src=f.dataset.full; lbCap.textContent=f.dataset.cap; lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click',()=>lb.classList.remove('open'));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') lb.classList.remove('open'); });
+</script>
+
+</body>
+</html>
