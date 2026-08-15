@@ -147,6 +147,11 @@
   }
   .feature .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(217,164,65,.2)}
 
+  /* video */
+  .videowrap{max-width:720px;margin:0 auto}
+  .videowrap video{width:100%;height:auto;border-radius:14px;box-shadow:0 12px 40px var(--shadow);display:block;background:#000}
+  .videowrap .cap{color:var(--muted);font-size:.9rem;margin-top:12px;text-align:center}
+
   /* about */
   .about{display:grid;grid-template-columns:1fr;gap:20px;max-width:640px;margin:0 auto;text-align:center}
   .about p{color:var(--ink-soft);font-size:1.05rem}
@@ -298,6 +303,20 @@
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:24px">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:28px">
+      <div class="kicker">A Night at the Mini</div>
+      <h2>Generated on the Mac Mini</h2>
+      <p>Fourteen short clips, each rendered overnight on a base-model M4 Mac Mini with no cloud and no API — local AI video from weights on a USB drive. Stitched together with a music bed from the catalog. Lower-res on purpose: speed is the point, and the nights are long.</p>
+    </div>
+    <div class="videowrap">
+      <video src="img/owl-coast-vhs.mp4" controls preload="metadata" playsinline></video>
+      <div class="cap">"Coast, at Twilight" — Wan 2.1, 320×256, assembled locally.</div>
     </div>
   </div>
 </section>
