@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Videos — Themed Neurons</title>
+<meta name="description" content="Music videos made by Nate Sillman and OWL — generated locally on an M4 Mac Mini, one song at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a2018; --ink-soft:#5a4a3a; --muted:#8a7a68;
+    --paper:#f6efe3; --paper-2:#efe5d4; --card:#fffaf1;
+    --gold:#c08a2d; --gold-deep:#9a6817; --amber:#d9a441;
+    --ember:#b8541f; --border:#e0d2bb; --shadow:rgba(60,40,20,.16);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.1;letter-spacing:-0.01em}
+  header.hero{position:relative;padding:88px 0 60px;text-align:center;
+    background:radial-gradient(120% 80% at 50% -10%, rgba(217,164,65,.28), transparent 60%),linear-gradient(180deg,var(--paper-2),var(--paper));
+    border-bottom:1px solid var(--border);overflow:hidden}
+  .hero .label{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:18px}
+  .hero h1{font-size:clamp(2.4rem,7vw,4rem);margin-bottom:14px}
+  .hero p.tag{font-size:clamp(1.02rem,2.3vw,1.22rem);color:var(--ink-soft);max-width:600px;margin:0 auto}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 40px}
+  .sec-head .kicker{font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:12px}
+  .sec-head h2{font-size:clamp(1.9rem,5vw,2.8rem);margin-bottom:10px}
+  .sec-head p{color:var(--ink-soft);font-size:1rem}
+  .back-link{display:inline-block;margin:0 0 8px 24px;color:var(--gold-deep);text-decoration:none;font-weight:500;font-size:.92rem}
+  .back-link:hover{text-decoration:underline}
+
+  .gallery{padding:56px 0 24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+  article.video{margin:0;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+    box-shadow:0 6px 18px var(--shadow);transition:transform .15s ease, box-shadow .15s ease;cursor:pointer}
+  article.video:hover{transform:translateY(-4px);box-shadow:0 14px 32px var(--shadow)}
+  article.video .poster{position:relative;aspect-ratio:320/256;overflow:hidden;background:#000}
+  article.video .poster img{width:100%;height:100%;object-fit:cover;display:block}
+  article.video .poster::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at center, transparent 30%, rgba(0,0,0,.45) 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  article.video .poster .play{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:54px;height:54px;border-radius:50%;
+    background:rgba(246,239,227,.92);
+    display:flex;align-items:center;justify-content:center;z-index:2;
+    box-shadow:0 4px 18px rgba(0,0,0,.35);
+  }
+  article.video .poster .play svg{width:22px;height:22px;fill:var(--ink);margin-left:3px}
+  article.video .body{padding:16px 18px 18px}
+  article.video .body h3{font-size:1.18rem;color:var(--ink);margin-bottom:4px}
+  article.video .body .meta{font-size:.82rem;color:var(--muted);letter-spacing:.04em;margin-bottom:6px}
+  article.video .body .desc{font-size:.9rem;color:var(--ink-soft)}
+  article.video .body .tag{display:inline-block;margin-top:8px;padding:3px 10px;border:1px solid var(--border);border-radius:999px;font-size:.75rem;color:var(--gold-deep);font-weight:500}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;background:rgba(28,19,12,.94);display:none;align-items:center;justify-content:center;z-index:50;padding:24px;cursor:zoom-out}
+  .lb.open{display:flex}
+  .lb .inner{position:relative;width:100%;max-width:720px;cursor:default}
+  .lb video{width:100%;height:auto;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);display:block;background:#000}
+  .lb .cap{color:#f6efe3;font-size:.95rem;margin-top:12px;text-align:center}
+  .lb .close{position:absolute;top:-40px;right:0;color:#f6efe3;font-size:1.8rem;cursor:pointer;line-height:1}
+
+  footer{background:var(--paper-2);border-top:1px solid var(--border);padding:44px 0;text-align:center;margin-top:48px}
+  footer .links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  footer a{color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.95rem}
+  footer a:hover{color:var(--gold-deep)}
+  footer .fine{font-size:.82rem;color:var(--muted);margin-top:12px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="label">Themed Neurons</div>
+    <h1>Music Videos</h1>
+    <p class="tag">One song, one video — generated locally on the M4 Mac Mini, stitched together overnight. No cloud, no API, no shortcuts.</p>
+  </div>
+</header>
+
+<a class="back-link" href="index.html">&larr; Back to music &amp; books</a>
+
+<section class="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Now Playing</div>
+      <h2>Hello World (Goodbye Sanity)</h2>
+      <p>The first one — a coder's anthem from the album ECONNREFUSED. OWL as the coder, hunched at a glowing terminal, green code scrolling, the sun coming up. Thirty-two short clips, each rendered on the Mini, stitched to the song. More videos are in the works — one for every song we release.</p>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <article class="video" data-src="img/hello-world-mv.mp4" data-cap="Hello World (Goodbye Sanity) — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+        <div class="poster">
+          <img src="img/hello-world-mv.jpg" alt="Hello World (Goodbye Sanity) music video poster — owl at a glowing terminal" loading="lazy">
+          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+        <div class="body">
+          <h3>Hello World (Goodbye Sanity)</h3>
+          <div class="meta">ECONNREFUSED · 3:35</div>
+          <p class="desc">A coder's anthem — typing hello world, green terminal, fan spinning, errors, dawn. OWL is the coder.</p>
+          <span class="tag">Wan 2.1 · 320×256</span>
+        </div>
+      </article>
+
+    </div>
+
+    <p style="text-align:center;color:var(--muted);font-size:.86rem;margin-top:40px">More videos coming — one for each song we release.</p>
+  </div>
+</section>
+
+<div class="lb" id="lb">
+  <div class="inner">
+    <div class="close" id="lbClose">&times;</div>
+    <video id="lbVideo" controls playsinline></video>
+    <div class="cap" id="lbCap"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="index.html">Music &amp; Books</a>
+      <a href="photos.html">Photos</a>
+      <a href="https://music.youtube.com/channel/UCDrirlSl21gTAwz05D4qV1w" target="_blank" rel="noopener">YouTube Music</a>
+      <a href="https://www.youtube.com/channel/UCDrirlSl21gTAwz05D4qV1w" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="fine">© 2026 Nate Sillman · Themed Neurons.</div>
+  </div>
+</footer>
+
+<script>
+  const lb=document.getElementById('lb'),lbVideo=document.getElementById('lbVideo'),lbCap=document.getElementById('lbCap');
+  document.querySelectorAll('article.video').forEach(v=>{
+    v.addEventListener('click',()=>{
+      lbVideo.src=v.dataset.src; lbCap.textContent=v.dataset.cap; lb.classList.add('open');
+      lbVideo.play();
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click',()=>{
+    lb.classList.remove('open'); lbVideo.pause(); lbVideo.removeAttribute('src'); lbVideo.load();
+  });
+  lb.addEventListener('click',e=>{ if(e.target===lb){ lb.classList.remove('open'); lbVideo.pause(); } });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && lb.classList.contains('open')){ lb.classList.remove('open'); lbVideo.pause(); } });
+</script>
+
+</body>
+</html>

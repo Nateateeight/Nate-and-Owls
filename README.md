@@ -4,7 +4,9 @@ A single-page site for Nate Sillman's music (Themed Neurons) and his published b
 
 ## What's here
 - `index.html` — the whole site (self-contained CSS, no build step)
-- `img/` — optimized album covers and book covers
+- `videos.html` — music video gallery (Hello World + future releases)
+- `photos.html` — photo & sketchbook gallery
+- `img/` — optimized album covers, book covers, and video posters
 
 ## Albums featured
 - Ghost Signals: Ballads of the Rails (13 songs)
