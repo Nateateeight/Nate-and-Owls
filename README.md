@@ -4,7 +4,7 @@ A single-page site for Nate Sillman's music (Themed Neurons) and his published b
 
 ## What's here
 - `index.html` — the whole site (self-contained CSS, no build step)
-- `videos.html` — music video gallery (Hello World + future releases)
+- `videos.html` — music video gallery (7 ECONNREFUSED tracks + Hiroshima Lullaby; Paste the API Key added 2026-08-25)
 - `photos.html` — photo & sketchbook gallery
 - `img/` — optimized album covers, book covers, and video posters
 
