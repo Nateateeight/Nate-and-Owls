@@ -33,6 +33,24 @@
   .back-link{display:inline-block;margin:0 0 8px 24px;color:var(--gold-deep);text-decoration:none;font-weight:500;font-size:.92rem}
   .back-link:hover{text-decoration:underline}
 
+  /* Album filter */
+  .album-filter{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:24px 0 8px}
+  .album-filter button{
+    background:var(--card);border:1px solid var(--border);color:var(--ink-soft);
+    padding:8px 18px;border-radius:999px;cursor:pointer;font-size:.88rem;font-weight:500;
+    transition:all .15s ease;
+  }
+  .album-filter button:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .album-filter button.active{background:var(--gold-deep);color:var(--paper);border-color:var(--gold-deep)}
+
+  /* Album sections */
+  .album-section{margin-top:48px}
+  .album-section:first-of-type{margin-top:32px}
+  .album-header{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+  .album-header h2{font-size:clamp(1.4rem,4vw,2rem);color:var(--ink)}
+  .album-header .count{font-size:.88rem;color:var(--muted);font-weight:500}
+  .album-header .year{margin-left:auto;font-size:.82rem;color:var(--muted)}
+
   .gallery{padding:56px 0 24px}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
   article.video{margin:0;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;
@@ -72,6 +90,11 @@
   footer a{color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.95rem}
   footer a:hover{color:var(--gold-deep)}
   footer .fine{font-size:.82rem;color:var(--muted);margin-top:12px}
+
+  @media(max-width:640px){
+    .album-header{flex-direction:column;gap:4px}
+    .album-header .year{margin-left:0}
+  }
 </style>
 </head>
 <body>
@@ -88,225 +111,297 @@
 
 <section class="gallery">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">Now Playing</div>
-      <h2>Hello World (Goodbye Sanity)</h2>
-      <p>The first one — a coder's anthem from the album ECONNREFUSED. OWL as the coder, hunched at a glowing terminal, green code scrolling, the sun coming up. Thirty-two short clips, each rendered on the Mini, stitched to the song. More videos are in the works — one for every song we release.</p>
+
+    <div class="album-filter" id="albumFilter">
+      <button data-album="all" class="active">All Albums</button>
+      <button data-album="econnrefused">ECONNREFUSED</button>
+      <button data-album="long-march">The Long March Home</button>
     </div>
 
-    <div class="grid" id="grid">
+    <!-- ECONNREFUSED -->
+    <div class="album-section" data-album="econnrefused">
+      <div class="album-header">
+        <h2>ECONNREFUSED</h2>
+        <span class="count">6 videos</span>
+        <span class="year">2026</span>
+      </div>
+      <div class="grid">
 
-      <article class="video" data-src="img/paste-the-api-key-mv.mp4" data-cap="Paste the API Key — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/paste-the-api-key-mv.jpg" alt="Paste the API Key music video poster — owl at a glowing terminal" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Paste the API Key</h3>
-          <div class="meta">ECONNREFUSED · 3:14</div>
-          <p class="desc">Industrial folk. An owl pastes an API key into a glowing terminal, gets 'invalid format — off by one', and reads error messages in a bed made of them. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
+        <article class="video" data-src="img/hello-world-mv.mp4" data-cap="Hello World (Goodbye Sanity) — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/hello-world-mv.jpg" alt="Hello World music video poster — coder at a glowing terminal" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Hello World (Goodbye Sanity)</h3>
+            <div class="meta">ECONNREFUSED · 3:35</div>
+            <p class="desc">The first one — a coder's anthem. OWL as the coder, hunched at a glowing terminal, green code scrolling, the sun coming up.</p>
+            <span class="tag">Wan 2.1 · 320×256</span>
+          </div>
+        </article>
 
-      <article class="video" data-src="img/token-balance-blues-mv.mp4" data-cap="Token Balance Blues — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/token-balance-blues-mv.jpg" alt="Token Balance Blues music video poster — cowboy at a glowing terminal in a dark saloon" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Token Balance Blues</h3>
-          <div class="meta">ECONNREFUSED · 3:38</div>
-          <p class="desc">Dark country. A cowboy counts tokens like bullets in a digital saloon, an owl watches from the piano, and every word's a penny. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
+        <article class="video" data-src="img/paste-the-api-key-mv.mp4" data-cap="Paste the API Key — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/paste-the-api-key-mv.jpg" alt="Paste the API Key music video poster" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Paste the API Key</h3>
+            <div class="meta">ECONNREFUSED · 2:59</div>
+            <p class="desc">Debug-folk. The oldest mistake in the book — the key that should have stayed secret, pasted where everyone could see. Wan 2.1.</p>
+            <span class="tag">Wan 2.1 · 320×256</span>
+          </div>
+        </article>
 
-      <article class="video" data-src="img/forty-seven-guides-mv.mp4" data-cap="Forty-Seven Guides — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/forty-seven-guides-mv.jpg" alt="Forty-Seven Guides music video poster — owl at a workbench buried in guides" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Forty-Seven Guides</h3>
-          <div class="meta">ECONNREFUSED · 3:35</div>
-          <p class="desc">Dark country. An owl alone at the workbench at night, one lamp, a mountain of guides, and the quiet realization that none of them actually answered the question. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
+        <article class="video" data-src="img/confidently-wrong-mv.mp4" data-cap="Confidently Wrong — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/confidently-wrong-mv.jpg" alt="Confidently Wrong music video poster — cowboy on a dark porch" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Confidently Wrong</h3>
+            <div class="meta">ECONNREFUSED · 3:35</div>
+            <p class="desc">Dark Country. A cowboy gives confident but wrong advice — the meta-hallucination song. OWL watches.</p>
+            <span class="tag">Wan 2.1 · 320×256</span>
+          </div>
+        </article>
 
-            <article class="video" data-src="img/cassette-tape-hiss-mv.mp4" data-cap="Cassette Tape Hiss — ECONNREFUSED. Wan 2.1, 320x256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/cassette-tape-hiss-mv.jpg" alt="Cassette Tape Hiss music video poster" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Cassette Tape Hiss</h3>
-          <div class="meta">ECONNREFUSED · 3:19</div>
-          <p class="desc">Lo-fi dev-folk. Analog warmth hissing under digital noise — the tape that remembers what the cloud forgot. OWL keeps watch.</p>
-          <span class="tag">Wan 2.1 · 320x256</span>
-        </div>
-      </article>
+        <article class="video" data-src="img/it-compiled-mv.mp4" data-cap="It Compiled (Famous Last Words) — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/it-compiled-mv.jpg" alt="It Compiled music video poster — dark server room" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>It Compiled (Famous Last Words)</h3>
+            <div class="meta">ECONNREFUSED · 3:39</div>
+            <p class="desc">Dark Country. A triumphant build that crashes in production — green logs, red lights, and the loneliest silence in tech. OWL keeps watch.</p>
+            <span class="tag">Wan 2.1 · 320×256</span>
+          </div>
+        </article>
 
-      <article class="video" data-src="img/rewrite-from-scratch-mv.mp4" data-cap="Rewrite from Scratch — ECONNREFUSED. Wan 2.1, 320x256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/rewrite-from-scratch-mv.jpg" alt="Rewrite from Scratch music video poster" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Rewrite from Scratch</h3>
-          <div class="meta">ECONNREFUSED · 2:58</div>
-          <p class="desc">Dev-folk. The fifth rewrite, the one that finally works, and the quiet grief of throwing away the other four. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320x256</span>
-        </div>
-      </article>
+        <article class="video" data-src="img/dependency-hell-mv.mp4" data-cap="Dependency Hell — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/dependency-hell-mv.jpg" alt="Dependency Hell music video poster — tangle of package versions" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Dependency Hell</h3>
+            <div class="meta">ECONNREFUSED · 3:56</div>
+            <p class="desc">Debug-folk. A song about the version tangle — every import a thread, every conflict a verse, and the build that finally resolves at 3am. Wan 2.1.</p>
+            <span class="tag">Wan 2.1 · 320×256</span>
+          </div>
+        </article>
 
-      <article class="video" data-src="img/ship-it-anyway-mv.mp4" data-cap="Ship It Anyway — ECONNREFUSED. Wan 2.1, 320x256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/ship-it-anyway-mv.jpg" alt="Ship It Anyway music video poster" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Ship It Anyway</h3>
-          <div class="meta">ECONNREFUSED · 3:13</div>
-          <p class="desc">Dark folk. Merge on Friday, pray on Sunday — ship it anyway and let the logs decide. OWL as witness.</p>
-          <span class="tag">Wan 2.1 · 320x256</span>
-        </div>
-      </article>
+        <article class="video" data-src="img/econnrefused-mv.mp4" data-cap="ECONNREFUSED — dev-folk. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/econnrefused-mv.jpg" alt="ECONNREFUSED music video poster — connection refused, owl at an empty port" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>ECONNREFUSED</h3>
+            <div class="meta">ECONNREFUSED · 1:59</div>
+            <p class="desc">Dev-folk. The connection that refuses — a port closed, a service asleep, and the long stare at the terminal before the retry. Wan 2.1.</p>
+            <span class="tag">Wan 2.1 · 320×256</span>
+          </div>
+        </article>
 
-      <article class="video" data-src="img/stack-overflow-prayer-mv.mp4" data-cap="Stack Overflow Prayer — ECONNREFUSED. Wan 2.1, 320x256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/stack-overflow-prayer-mv.jpg" alt="Stack Overflow Prayer music video poster" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Stack Overflow Prayer</h3>
-          <div class="meta">ECONNREFUSED · 4:13</div>
-          <p class="desc">Dev-folk hymn. A question asked to the void of Stack Overflow, answered by a stranger at 2am. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320x256</span>
-        </div>
-      </article>
-
-<article class="video" data-src="img/still-here-mv.mp4" data-cap="Still Here — ECONNREFUSED. Wan 2.1, 320x256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/still-here-mv.jpg" alt="Still Here music video poster" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Still Here</h3>
-          <div class="meta">ECONNREFUSED · 3:36</div>
-          <p class="desc">Punk-folk closer from ECONNREFUSED. The owl stays at the desk through every season — grayer, steadier — and nods at the end. Still here, still coding. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320x256</span>
-        </div>
-      </article>
-
-<article class="video" data-src="img/2am-motel-room-debugging-mv.mp4" data-cap="2AM Motel Room Debugging — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/2am-motel-room-debugging-mv.jpg" alt="2AM Motel Room Debugging music video poster — neon motel sign" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>2AM Motel Room Debugging</h3>
-          <div class="meta">ECONNREFUSED · 3:29</div>
-          <p class="desc">Lo-fi Americana. A neon motel sign, a laptop at 3AM, a misplaced comma, and the long night's work done. OWL keeps watch.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/hello-world-mv.mp4" data-cap="Hello World (Goodbye Sanity) — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/hello-world-mv.jpg" alt="Hello World (Goodbye Sanity) music video poster — owl at a glowing terminal" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Hello World (Goodbye Sanity)</h3>
-          <div class="meta">ECONNREFUSED · 3:35</div>
-          <p class="desc">A coder's anthem — typing hello world, green terminal, fan spinning, errors, dawn. OWL is the coder.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/hiroshima-lullaby-mv.mp4" data-cap="Hiroshima Lullaby — The Long March Home. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/hiroshima-lullaby-mv.jpg" alt="Hiroshima Lullaby music video poster — paper crane in black rain" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Hiroshima Lullaby</h3>
-          <div class="meta">The Long March Home · 2:49</div>
-          <p class="desc">Dark Americana / WWII Pacific Theater. Vinyl record, ballroom, coral graves, paper cranes, black rain. One owl as witness.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/confidently-wrong-mv.mp4" data-cap="Confidently Wrong — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/confidently-wrong-mv.jpg" alt="Confidently Wrong music video poster — cowboy in dark desert" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Confidently Wrong</h3>
-          <div class="meta">ECONNREFUSED · 3:35</div>
-          <p class="desc">Dark Country. A cowboy gives confident but wrong advice — the meta-hallucination song. OWL watches.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/it-compiled-mv.mp4" data-cap="It Compiled (Famous Last Words) — ECONNREFUSED. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/it-compiled-mv.jpg" alt="It Compiled music video poster — dark server room" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>It Compiled (Famous Last Words)</h3>
-          <div class="meta">ECONNREFUSED · 3:39</div>
-          <p class="desc">Dark Country. A triumphant build that crashes in production — green logs, red lights, and the loneliest silence in tech. OWL keeps watch.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/dependency-hell-mv.mp4" data-cap="Dependency Hell — debug-folk. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/dependency-hell-mv.jpg" alt="Dependency Hell music video poster — tangle of package versions" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Dependency Hell</h3>
-          <div class="meta">debug-folk · 3:56</div>
-          <p class="desc">Debug-folk. A song about the version tangle — every import a thread, every conflict a verse, and the build that finally resolves at 3am. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/econnrefused-mv.mp4" data-cap="ECONNREFUSED — dev-folk. Wan 2.1, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/econnrefused-mv.jpg" alt="ECONNREFUSED music video poster — connection refused, owl at an empty port" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>ECONNREFUSED</h3>
-          <div class="meta">dev-folk · 1:59</div>
-          <p class="desc">Dev-folk. The connection that refuses — a port closed, a service asleep, and the long stare at the terminal before the retry. Wan 2.1.</p>
-          <span class="tag">Wan 2.1 · 320×256</span>
-        </div>
-      </article>
-
-      <article class="video" data-src="img/rifles-at-dawn-mv.mp4" data-cap="Rifles at Dawn — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
-        <div class="poster">
-          <img src="img/rifles-at-dawn-mv.jpg" alt="Rifles at Dawn music video poster — minuteman on a frozen field at dawn" loading="lazy">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        </div>
-        <div class="body">
-          <h3>Rifles at Dawn</h3>
-          <div class="meta">The Long March Home · 2:18</div>
-          <p class="desc">Americana folk-rock. Lexington, Valley Forge, Yorktown — built a nation on a funeral pyre. Every flag is dyed in red. One owl as witness.</p>
-          <span class="tag">FastMetal 5B · 320×256</span>
-        </div>
-      </article>
-
+      </div>
     </div>
 
-    <p style="text-align:center;color:var(--muted);font-size:.86rem;margin-top:40px">More videos coming — one for each song we release.</p>
+    <!-- THE LONG MARCH HOME -->
+    <div class="album-section" data-album="long-march">
+      <div class="album-header">
+        <h2>The Long March Home</h2>
+        <span class="count">14 videos</span>
+        <span class="year">2026</span>
+      </div>
+      <div class="grid">
+
+        <article class="video" data-src="img/01riflesatdawn-mv.mp4" data-cap="Rifles at Dawn — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/01riflesatdawn-mv.jpg" alt="Rifles at Dawn music video poster — minuteman on a frozen field at dawn" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Rifles at Dawn</h3>
+            <div class="meta">The Long March Home · 2:19</div>
+            <p class="desc">Americana folk-rock. Lexington, Valley Forge, Yorktown — built a nation on a funeral pyre. Every flag is dyed in red. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/02mudandgas-mv.mp4" data-cap="Mud and Gas — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/02mudandgas-mv.jpg" alt="Mud and Gas music video poster — soldier in a WWI trench at dawn" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Mud and Gas</h3>
+            <div class="meta">The Long March Home · 2:18</div>
+            <p class="desc">Industrial punk with WWI-era music hall DNA. The Somme, chlorine gas, Christmas football in no-man's land. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/03guernicaburning-mv.mp4" data-cap="Guernica Burning — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/03guernicaburning-mv.jpg" alt="Guernica Burning music video poster — Spanish village square under bombers" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Guernica Burning</h3>
+            <div class="meta">The Long March Home · 2:46</div>
+            <p class="desc">Spanish folk-punk with flamenco DNA. International Brigades, Picasso's monochrome horror, the rehearsal for the greater war. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/04hiroshimalullaby-mv.mp4" data-cap="Hiroshima Lullaby — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/04hiroshimalullaby-mv.jpg" alt="Hiroshima Lullaby music video poster — paper crane falls through black rain" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Hiroshima Lullaby</h3>
+            <div class="meta">The Long March Home · 2:49</div>
+            <p class="desc">Dark Americana with 1940s big-band swing undertones. Pearl Harbor, Enola Gay, paper cranes, black rain. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/0538thparallel-mv.mp4" data-cap="38th Parallel — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/0538thparallel-mv.jpg" alt="38th Parallel music video poster — frozen Korean mountainside" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>38th Parallel</h3>
+            <div class="meta">The Long March Home · 2:54</div>
+            <p class="desc">Early rockabilly punk. Inchon, Chosin Reservoir, the forgotten war. The mountains remember. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/06napalmmorning-mv.mp4" data-cap="Napalm Morning — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/06napalmmorning-mv.jpg" alt="Napalm Morning music video poster — girl running on a Vietnamese road" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Napalm Morning</h3>
+            <div class="meta">The Long March Home · 2:10</div>
+            <p class="desc">Psychedelic punk with garage rock rawness. Khe Sanh, Tet Offensive, Kent State, the Wall. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/07sowetosunrise-mv.mp4" data-cap="Soweto Sunrise — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/07sowetosunrise-mv.jpg" alt="Soweto Sunrise music video poster — schoolchildren marching with raised fists" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Soweto Sunrise</h3>
+            <div class="meta">The Long March Home · 2:52</div>
+            <p class="desc">South African township music meets industrial punk. Hector Pieterson, the long walk home, 1994. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/08falklandsfog-mv.mp4" data-cap="Falklands Fog — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/08falklandsfog-mv.jpg" alt="Falklands Fog music video poster — British ship in South Atlantic fog" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Falklands Fog</h3>
+            <div class="meta">The Long March Home · 2:58</div>
+            <p class="desc">Post-punk with British working-class grit. Belgrano, Tumbledown Mountain, the empire's last colonial beat. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/09desertstorm-mv.mp4" data-cap="Desert Storm — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/09desertstorm-mv.jpg" alt="Desert Storm music video poster — oil wells burning in Kuwaiti desert" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Desert Storm</h3>
+            <div class="meta">The Long March Home · 3:23</div>
+            <p class="desc">Industrial rock meets early 90s alternative. Highway of Death, Patriot missiles, Gulf War syndrome. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/10sarajevostrings-mv.mp4" data-cap="Sarajevo Strings — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/10sarajevostrings-mv.jpg" alt="Sarajevo Strings music video poster — cellist plays amid rubble" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Sarajevo Strings</h3>
+            <div class="meta">The Long March Home · 2:47</div>
+            <p class="desc">Eastern European folk-punk with Balkan brass. Vedran Smailovic played his cello in the ruins. Srebrenica. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/11rwandarain-mv.mp4" data-cap="Rwanda Rain — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/11rwandarain-mv.jpg" alt="Rwanda Rain music video poster — hills of Kigali in the rain" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Rwanda Rain</h3>
+            <div class="meta">The Long March Home · 2:40</div>
+            <p class="desc">East African folk meets industrial dread. The hundred days, Dallaire's blue helmets, the world turned away. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/12fallujahdust-mv.mp4" data-cap="Fallujah Dust — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/12fallujahdust-mv.jpg" alt="Fallujah Dust music video poster — minaret leans over a ruined street" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Fallujah Dust</h3>
+            <div class="meta">The Long March Home · 3:00</div>
+            <p class="desc">Heavy industrial metal with Middle Eastern melodic scales. Blackwater's bodies, Abu Ghraib, depleted uranium. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/13alepponights-mv.mp4" data-cap="Aleppo Nights — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/13alepponights-mv.jpg" alt="Aleppo Nights music video poster — White Helmet pulls a baby from rubble" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>Aleppo Nights</h3>
+            <div class="meta">The Long March Home · 7:59</div>
+            <p class="desc">Middle Eastern electronic-folk with industrial and trap beats. Daraa's children, barrel bombs, the White Helmets. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+        <article class="video" data-src="img/14thelongmarchhome-mv.mp4" data-cap="The Long March Home — The Long March Home. FastMetal 5B, 320×256, assembled locally on the M4 Mac Mini.">
+          <div class="poster">
+            <img src="img/14thelongmarchhome-mv.jpg" alt="The Long March Home music video poster — ancient road with soldiers marching through time" loading="lazy">
+            <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="body">
+            <h3>The Long March Home</h3>
+            <div class="meta">The Long March Home · 3:38</div>
+            <p class="desc">Epic folk-industrial. Troy to Fallujah — the war machine just changes its name. Every war is someone else's Troy. One owl as witness.</p>
+            <span class="tag">FastMetal 5B · 320×256</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -331,6 +426,7 @@
 </footer>
 
 <script>
+  // Lightbox
   const lb=document.getElementById('lb'),lbVideo=document.getElementById('lbVideo'),lbCap=document.getElementById('lbCap');
   document.querySelectorAll('article.video').forEach(v=>{
     v.addEventListener('click',()=>{
@@ -343,6 +439,24 @@
   });
   lb.addEventListener('click',e=>{ if(e.target===lb){ lb.classList.remove('open'); lbVideo.pause(); } });
   document.addEventListener('keydown',e=>{ if(e.key==='Escape' && lb.classList.contains('open')){ lb.classList.remove('open'); lbVideo.pause(); } });
+
+  // Album filter
+  const filterButtons=document.querySelectorAll('#albumFilter button');
+  const sections=document.querySelectorAll('.album-section');
+  filterButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      filterButtons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const album=btn.dataset.album;
+      sections.forEach(sec=>{
+        if(album==='all' || sec.dataset.album===album){
+          sec.style.display='block';
+        }else{
+          sec.style.display='none';
+        }
+      });
+    });
+  });
 </script>
 
 </body>
