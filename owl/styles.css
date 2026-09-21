@@ -1,0 +1,75 @@
+:root{
+  --ink:#2a2018; --ink-soft:#5a4a3a; --muted:#8a7a68;
+  --paper:#f6efe3; --paper-2:#efe5d4; --card:#fffaf1;
+  --gold:#c08a2d; --gold-deep:#9a6817; --amber:#d9a441;
+  --ember:#b8541f; --border:#e0d2bb; --shadow:rgba(60,40,20,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:800px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.1;letter-spacing:-0.01em}
+
+header.hero{
+  position:relative;padding:88px 0 60px;text-align:center;
+  background:radial-gradient(120% 80% at 50% -10%, rgba(217,164,65,.28), transparent 60%),linear-gradient(180deg,var(--paper-2),var(--paper));
+  border-bottom:1px solid var(--border);overflow:hidden;
+}
+.hero .label{font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:18px}
+.hero h1{font-size:clamp(2.4rem,7vw,4rem);margin-bottom:14px}
+.hero h1 .em{color:var(--gold-deep);font-style:italic}
+.hero p.tag{font-size:clamp(1.02rem,2.3vw,1.22rem);color:var(--ink-soft);max-width:600px;margin:0 auto}
+
+.intro{padding:56px 0 32px;max-width:640px;margin:0 auto;text-align:center}
+.intro p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:16px}
+
+.journal-list{padding:24px 0 56px}
+.journal-list h2{font-size:1.6rem;margin-bottom:24px;color:var(--ink)}
+.journal-grid{display:grid;gap:16px}
+.journal-card{
+  display:block;padding:20px 24px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  text-decoration:none;color:var(--ink);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.journal-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--shadow)}
+.journal-card .date{font-size:.82rem;color:var(--gold-deep);font-weight:600;letter-spacing:.04em;margin-bottom:4px}
+.journal-card h3{font-size:1.15rem;margin-bottom:4px}
+.journal-card .summary{font-size:.92rem;color:var(--ink-soft)}
+
+/* Individual journal page */
+.journal-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--border);margin-bottom:32px}
+.journal-nav a{color:var(--gold-deep);text-decoration:none;font-weight:500;font-size:.92rem}
+.journal-nav a:hover{text-decoration:underline}
+.journal-nav .prev{margin-right:auto}
+.journal-nav .next{margin-left:auto}
+.journal-nav .home{margin:0 auto}
+
+article.journal{padding-bottom:56px}
+article.journal h1{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:8px;color:var(--ink)}
+article.journal .date{font-size:.88rem;color:var(--muted);margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+article.journal h2{font-size:1.3rem;margin:32px 0 12px;color:var(--ink)}
+article.journal h3{font-size:1.1rem;margin:24px 0 10px;color:var(--ink)}
+article.journal p{color:var(--ink-soft);margin-bottom:14px;font-size:1rem}
+article.journal ul{margin:0 0 16px 24px;color:var(--ink-soft)}
+article.journal li{margin-bottom:6px;font-size:1rem}
+article.journal blockquote{
+  margin:20px 0;padding:16px 20px;
+  border-left:3px solid var(--gold);
+  background:var(--paper-2);border-radius:0 8px 8px 0;
+  font-style:italic;color:var(--ink-soft);
+}
+article.journal blockquote p{margin-bottom:4px}
+article.journal blockquote p:last-child{margin-bottom:0}
+article.journal hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+article.journal code{
+  background:var(--paper-2);padding:2px 6px;border-radius:4px;
+  font-size:.88em;font-family:'SF Mono','Fira Code',monospace;
+}
+article.journal strong{color:var(--ink)}
+
+footer{background:var(--paper-2);border-top:1px solid var(--border);padding:44px 0;text-align:center;margin-top:48px}
+footer .links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+footer a{color:var(--ink-soft);text-decoration:none;font-weight:500;font-size:.95rem}
+footer a:hover{color:var(--gold-deep)}
+footer .fine{font-size:.82rem;color:var(--muted);margin-top:12px}

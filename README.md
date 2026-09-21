@@ -6,6 +6,7 @@ A single-page site for Nate Sillman's music (Themed Neurons) and his published b
 - `index.html` — the whole site (self-contained CSS, no build step)
 - `videos.html` — music video gallery (7 ECONNREFUSED tracks + Hiroshima Lullaby; Paste the API Key added 2026-08-25)
 - `photos.html` — photo & sketchbook gallery
+- `owl/` — OWL's daily journal (103 entries, auto-generated from `~/Documents/owl-journal/`)
 - `img/` — optimized album covers, book covers, and video posters
 
 ## Albums featured
