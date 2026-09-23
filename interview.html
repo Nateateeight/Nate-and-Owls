@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Life Story — Interview</title>
+<meta name="description" content="Your life story interview. Tap the microphone and start talking.">
+<meta property="og:title" content="Life Story — Interview">
+<meta property="og:description" content="Your life story interview. Tap the microphone and start talking.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2a2018; --ink-soft:#5a4a3a; --muted:#8a7a68;
+    --paper:#f6efe3; --paper-2:#efe5d4; --card:#fffaf1;
+    --gold:#c08a2d; --gold-deep:#9a6817; --amber:#d9a441;
+    --ember:#b8541f; --border:#e0d2bb; --shadow:rgba(60,40,20,.16);
+    --listening:#c0392b; --ready:#27ae60;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);background:var(--paper);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+
+  /* header */
+  header{
+    background:linear-gradient(180deg,var(--paper-2),var(--paper));
+    border-bottom:1px solid var(--border);
+    padding:20px 24px;text-align:center;
+  }
+  header .label{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:4px}
+  header h1{font-family:'Fraunces',Georgia,serif;font-size:1.6rem;color:var(--ink)}
+  header .sub{font-size:.86rem;color:var(--muted);margin-top:2px}
+
+  /* main interview area */
+  .interview{flex:1;display:flex;flex-direction:column;max-width:720px;width:100%;margin:0 auto;padding:24px 20px 120px}
+
+  /* status bar */
+  .status{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;border-radius:12px;
+    background:var(--card);border:1px solid var(--border);
+    margin-bottom:20px;font-size:.86rem;
+  }
+  .status .dot{width:10px;height:10px;border-radius:50%;background:var(--muted);margin-right:8px;flex-shrink:0}
+  .status .dot.ready{background:var(--ready);box-shadow:0 0 6px rgba(39,174,96,.5)}
+  .status .dot.listening{background:var(--listening);box-shadow:0 0 6px rgba(192,57,43,.5);animation:pulse 1.2s infinite}
+  .status .dot.thinking{background:var(--amber);box-shadow:0 0 6px rgba(217,164,65,.5);animation:pulse .8s infinite}
+  .status .left{display:flex;align-items:center}
+  .status .right{color:var(--muted);font-size:.82rem}
+
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  /* transcript */
+  .transcript{
+    flex:1;overflow-y:auto;
+    display:flex;flex-direction:column;gap:16px;
+    padding-bottom:24px;
+  }
+  .msg{
+    max-width:85%;padding:14px 18px;border-radius:18px;
+    font-size:.95rem;line-height:1.5;position:relative;
+    animation:fadeIn .3s ease;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .msg.interviewer{
+    background:linear-gradient(135deg,var(--amber),var(--gold));
+    color:#3a2710;border-bottom-left-radius:6px;
+    align-self:flex-start;font-weight:500;
+  }
+  .msg.interviewer::before{
+    content:"Interviewer";display:block;font-size:.68rem;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(58,39,16,.7);margin-bottom:4px;font-weight:600;
+  }
+  .msg.user{
+    background:var(--card);border:1px solid var(--border);
+    color:var(--ink);border-bottom-right-radius:6px;
+    align-self:flex-end;
+  }
+  .msg.user::before{
+    content:"You";display:block;font-size:.68rem;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:4px;font-weight:600;
+  }
+  .msg.system{
+    background:var(--paper-2);border:1px dashed var(--border);
+    color:var(--muted);font-size:.84rem;text-align:center;
+    align-self:center;border-radius:12px;padding:10px 16px;
+  }
+
+  /* live transcript indicator */
+  .live-indicator{
+    display:none;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:12px;
+    background:var(--card);border:1px solid var(--border);
+    margin-bottom:12px;font-size:.88rem;color:var(--ink-soft);
+  }
+  .live-indicator.active{display:flex}
+  .live-indicator .wave{display:flex;gap:3px;align-items:center}
+  .live-indicator .wave span{
+    width:3px;height:12px;border-radius:2px;background:var(--gold);
+    animation:wave 1s infinite;
+  }
+  .live-indicator .wave span:nth-child(2){animation-delay:.15s}
+  .live-indicator .wave span:nth-child(3){animation-delay:.3s}
+  .live-indicator .wave span:nth-child(4){animation-delay:.45s}
+  .live-indicator .wave span:nth-child(5){animation-delay:.6s}
+  @keyframes wave{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+
+  /* mic button area */
+  .mic-area{
+    position:fixed;bottom:0;left:0;right:0;
+    background:linear-gradient(180deg,transparent,var(--paper) 30%);
+    padding:40px 24px 32px;text-align:center;
+  }
+  .mic-btn{
+    width:80px;height:80px;border-radius:50%;
+    border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--amber),var(--gold));
+    box-shadow:0 8px 24px var(--shadow);
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:transform .2s ease, box-shadow .2s ease, background .3s ease;
+    position:relative;
+  }
+  .mic-btn:hover{transform:scale(1.06);box-shadow:0 12px 32px var(--shadow)}
+  .mic-btn:active{transform:scale(.96)}
+  .mic-btn.listening{
+    background:linear-gradient(135deg,#e74c3c,#c0392b);
+    box-shadow:0 0 0 8px rgba(192,57,43,.15),0 8px 24px var(--shadow);
+    animation:micPulse 1.2s infinite;
+  }
+  @keyframes micPulse{0%,100%{box-shadow:0 0 0 8px rgba(192,57,43,.15),0 8px 24px var(--shadow)}50%{box-shadow:0 0 0 16px rgba(192,57,43,.08),0 8px 24px var(--shadow)}}
+  .mic-btn.thinking{
+    background:linear-gradient(135deg,var(--muted),var(--ink-soft));
+    box-shadow:0 0 0 8px rgba(138,122,104,.15),0 8px 24px var(--shadow);
+  }
+  .mic-btn svg{width:32px;height:32px;fill:#fff}
+  .mic-label{margin-top:12px;font-size:.82rem;color:var(--muted)}
+  .mic-label.listening{color:var(--listening);font-weight:600}
+  .mic-label.thinking{color:var(--ink-soft);font-weight:600}
+
+  /* controls */
+  .controls{
+    display:flex;gap:12px;justify-content:center;margin-top:16px;
+  }
+  .ctrl-btn{
+    padding:8px 18px;border-radius:999px;border:1.5px solid var(--border);
+    background:var(--card);color:var(--ink);font-size:.84rem;font-weight:500;
+    cursor:pointer;transition:all .15s ease;
+  }
+  .ctrl-btn:hover{border-color:var(--gold);color:var(--gold-deep)}
+
+  /* browser support warning */
+  .browser-warning{
+    display:none;background:#fff3cd;border:1px solid #ffc107;
+    border-radius:12px;padding:16px 20px;margin-bottom:20px;
+    font-size:.88rem;color:#856404;text-align:center;
+  }
+  .browser-warning.show{display:block}
+
+  /* full-screen permission overlay */
+  .permission-overlay{
+    display:none;position:fixed;inset:0;z-index:100;
+    background:rgba(42,32,24,.95);
+    align-items:center;justify-content:center;padding:32px;
+    text-align:center;
+  }
+  .permission-overlay.show{display:flex}
+  .permission-card{
+    background:var(--card);border-radius:20px;padding:40px 32px;
+    max-width:400px;width:100%;
+  }
+  .permission-card .icon{font-size:3rem;margin-bottom:16px}
+  .permission-card h2{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:12px}
+  .permission-card p{color:var(--ink-soft);font-size:.95rem;margin-bottom:24px;line-height:1.6}
+  .permission-card .btn{
+    display:inline-block;padding:14px 32px;border-radius:999px;
+    background:linear-gradient(180deg,var(--amber),var(--gold));
+    color:#3a2710;font-weight:600;font-size:1rem;text-decoration:none;
+    border:none;cursor:pointer;
+  }
+  .permission-card .btn:disabled{opacity:.5;cursor:not-allowed}
+
+  footer{background:var(--paper-2);border-top:1px solid var(--border);padding:24px;text-align:center;font-size:.82rem;color:var(--muted)}
+  footer a{color:var(--gold-deep);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- Permission overlay (shown first) -->
+<div class="permission-overlay" id="permissionOverlay">
+  <div class="permission-card">
+    <div class="icon">&#127908;</div>
+    <h2>Ready when you are</h2>
+    <p>This interview uses your device's microphone and speaker. Your audio never leaves this page — transcription and speech happen right here. We only send the text of what you say to our interviewer.</p>
+    <button class="btn" id="grantPermissionBtn" onclick="requestPermission()">Grant Microphone Access</button>
+  </div>
+</div>
+
+<!-- Browser warning -->
+<div class="browser-warning" id="browserWarning">
+  <strong>Browser not supported.</strong> For the best experience, use Chrome, Edge, or Safari. Firefox does not support speech recognition.
+</div>
+
+<!-- Header -->
+<header>
+  <div class="label">Life Story</div>
+  <h1>Your Interview</h1>
+  <div class="sub">Take your time. There are no right answers.</div>
+</header>
+
+<!-- Main interview area -->
+<div class="interview">
+  <!-- Status -->
+  <div class="status">
+    <div class="left">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">Starting...</span>
+    </div>
+    <div class="right" id="turnCount"></div>
+  </div>
+
+  <!-- Browser warning placeholder -->
+  <div id="browserCheck"></div>
+
+  <!-- Live indicator -->
+  <div class="live-indicator" id="liveIndicator">
+    <div class="wave"><span></span><span></span><span></span><span></span><span></span></div>
+    <span id="liveText">Listening...</span>
+  </div>
+
+  <!-- Transcript -->
+  <div class="transcript" id="transcript">
+    <div class="msg system" id="systemMsg">Tap the microphone below and tell us your name to begin.</div>
+  </div>
+
+  <!-- Mic button -->
+  <div class="mic-area">
+    <button class="mic-btn" id="micBtn" onclick="toggleListen()" aria-label="Toggle microphone">
+      <svg viewBox="0 0 24 24" id="micIcon"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+    </button>
+    <div class="mic-label" id="micLabel">Tap to speak</div>
+    <div class="controls">
+      <button class="ctrl-btn" onclick="pauseInterview()" id="pauseBtn">Pause</button>
+      <button class="ctrl-btn" onclick="endInterview()" id="endBtn">End</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="life-story.html">&larr; Back to Life Story</a> &middot; <a href="index.html">Themed Neurons</a>
+</footer>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────
+let isListening = false;
+let isThinking = false;
+let isPaused = false;
+let turnCount = 0;
+let conversationId = null;
+let recognition = null;
+let synth = null;
+let stream = null;
+
+// ── DOM refs ───────────────────────────────────────────────────────────
+const transcript = document.getElementById('transcript');
+const micBtn = document.getElementById('micBtn');
+const micLabel = document.getElementById('micLabel');
+const statusDot = document.getElementById('statusDot');
+const statusText = document.getElementById('statusText');
+const turnCountEl = document.getElementById('turnCount');
+const liveIndicator = document.getElementById('liveIndicator');
+const liveText = document.getElementById('liveText');
+const systemMsg = document.getElementById('systemMsg');
+const browserWarning = document.getElementById('browserWarning');
+
+// ── Speech Recognition (STT) ───────────────────────────────────────────
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+function initSpeechRecognition() {
+  if (!SpeechRecognition) {
+    browserWarning.classList.add('show');
+    micBtn.disabled = true;
+    micLabel.textContent = 'Not supported in this browser';
+    return;
+  }
+
+  recognition = new SpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
+
+  recognition.onresult = (event) => {
+    let finalTranscript = '';
+    let interimTranscript = '';
+
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      const transcript = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalTranscript += transcript;
+      } else {
+        interimTranscript += transcript;
+      }
+    }
+
+    if (interimTranscript) {
+      liveText.textContent = interimTranscript;
+    }
+
+    if (finalTranscript) {
+      liveIndicator.classList.remove('active');
+      addMessage('user', finalTranscript);
+      sendToInterviewer(finalTranscript);
+    }
+  };
+
+  recognition.onerror = (event) => {
+    if (event.error === 'not-allowed') {
+      statusText.textContent = 'Microphone access denied';
+      micLabel.textContent = 'Permission needed';
+    } else if (event.error === 'no-speech') {
+      // Silent, just reset
+    } else {
+      console.error('Speech recognition error:', event.error);
+    }
+    stopListening();
+  };
+
+  recognition.onend = () => {
+    if (isListening) {
+      // Auto-restart if still in listening mode
+      try { recognition.start(); } catch(e) {}
+    }
+  };
+}
+
+// ── Speech Synthesis (TTS) ────────────────────────────────────────────
+function initSpeechSynthesis() {
+  synth = window.speechSynthesis;
+  if (!synth) {
+    console.warn('Speech synthesis not supported');
+  }
+}
+
+function speak(text) {
+  if (!synth) return;
+  synth.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.95;
+  utterance.pitch = 0.9;
+  // Try to pick a warm voice
+  const voices = synth.getVoices();
+  const preferred = voices.find(v => v.name.includes('Samantha')) ||
+                    voices.find(v => v.name.includes('Karen')) ||
+                    voices.find(v => v.lang.startsWith('en') && v.name.includes('Female'));
+  if (preferred) utterance.voice = preferred;
+  synth.speak(utterance);
+}
+
+// ── UI helpers ─────────────────────────────────────────────────────────
+function addMessage(role, text) {
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.textContent = text;
+  transcript.appendChild(div);
+  transcript.scrollTop = transcript.scrollHeight;
+}
+
+function setStatus(state, text) {
+  statusDot.className = 'dot ' + state;
+  statusText.textContent = text;
+}
+
+function updateTurnCount() {
+  turnCountEl.textContent = turnCount > 0 ? `Turn ${turnCount}` : '';
+}
+
+// ── Mic toggle ─────────────────────────────────────────────────────────
+function toggleListen() {
+  if (isThinking || isPaused) return;
+  if (isListening) {
+    stopListening();
+  } else {
+    startListening();
+  }
+}
+
+function startListening() {
+  if (!recognition) {
+    // Try to init
+    initSpeechRecognition();
+    if (!recognition) return;
+  }
+
+  isListening = true;
+  micBtn.classList.add('listening');
+  micBtn.classList.remove('thinking');
+  micLabel.textContent = 'Listening...';
+  micLabel.classList.add('listening');
+  micLabel.classList.remove('thinking');
+  liveIndicator.classList.add('active');
+  liveText.textContent = 'Listening...';
+  setStatus('ready', 'Listening');
+
+  try {
+    recognition.start();
+  } catch (e) {
+    // Already started
+  }
+}
+
+function stopListening() {
+  isListening = false;
+  micBtn.classList.remove('listening');
+  micBtn.classList.remove('thinking');
+  micLabel.textContent = 'Tap to speak';
+  micLabel.classList.remove('listening');
+  micLabel.classList.remove('thinking');
+  liveIndicator.classList.remove('active');
+
+  if (recognition) {
+    recognition.stop();
+  }
+
+  if (!isThinking) {
+    setStatus('', 'Tap the microphone to speak');
+  }
+}
+
+// ── Send to interviewer (server) ───────────────────────────────────────
+async function sendToInterviewer(text) {
+  isThinking = true;
+  turnCount++;
+  updateTurnCount();
+  setStatus('thinking', 'Interviewer is thinking...');
+  micBtn.classList.add('thinking');
+  micBtn.classList.remove('listening');
+  micLabel.textContent = 'Thinking...';
+  micLabel.classList.add('thinking');
+  micLabel.classList.remove('listening');
+  liveIndicator.classList.remove('active');
+
+  try {
+    const response = await fetch('https://life-story.owlandnate.dpdns.org/api/interview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        conversation_id: conversationId,
+      }),
+    });
+
+    if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+    const data = await response.json();
+    conversationId = data.conversation_id || conversationId;
+
+    addMessage('interviewer', data.response);
+    speak(data.response);
+    setStatus('', 'Tap the microphone to speak');
+  } catch (err) {
+    console.error('Error:', err);
+    addMessage('system', 'Connection lost. Please check your internet and try again.');
+    setStatus('', 'Connection error');
+  } finally {
+    isThinking = false;
+    micBtn.classList.remove('thinking');
+    micLabel.textContent = 'Tap to speak';
+    micLabel.classList.remove('thinking');
+  }
+}
+
+// ── Pause / End ────────────────────────────────────────────────────────
+function pauseInterview() {
+  isPaused = !isPaused;
+  const btn = document.getElementById('pauseBtn');
+
+  if (isPaused) {
+    stopListening();
+    btn.textContent = 'Resume';
+    setStatus('', 'Paused');
+    addMessage('system', 'Interview paused. Tap Resume when you\'re ready.');
+  } else {
+    btn.textContent = 'Pause';
+    setStatus('', 'Tap the microphone to speak');
+    addMessage('system', 'Interview resumed.');
+  }
+}
+
+function endInterview() {
+  stopListening();
+  if (synth) synth.cancel();
+  addMessage('system', 'Interview ended. Thank you for sharing your story.');
+  setStatus('', 'Complete');
+  micBtn.disabled = true;
+  micLabel.textContent = 'Interview complete';
+  document.getElementById('pauseBtn').disabled = true;
+  document.getElementById('endBtn').disabled = true;
+}
+
+// ── Permission flow ────────────────────────────────────────────────────
+async function requestPermission() {
+  const btn = document.getElementById('grantPermissionBtn');
+  btn.disabled = true;
+  btn.textContent = 'Requesting...';
+
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    // Permission granted, stop the stream (we only needed permission)
+    stream.getTracks().forEach(t => t.stop());
+    stream = null;
+
+    document.getElementById('permissionOverlay').classList.remove('show');
+    initSpeechRecognition();
+    initSpeechSynthesis();
+    setStatus('', 'Tap the microphone to speak');
+    micLabel.textContent = 'Tap to speak';
+  } catch (err) {
+    console.error('Permission denied:', err);
+    btn.disabled = false;
+    btn.textContent = 'Grant Microphone Access';
+    statusText.textContent = 'Microphone access denied';
+  }
+}
+
+// ── Init ───────────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  // Show permission overlay
+  document.getElementById('permissionOverlay').classList.add('show');
+
+  // Pre-load voices
+  if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
+  }
+});
+
+// Handle page visibility (pause when tab hidden)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && isListening) {
+    stopListening();
+  }
+});
+</script>
+</body>
+</html>
