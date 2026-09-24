@@ -661,6 +661,65 @@ async function deleteInterviewData() {
   addMessage('system', 'All interview data has been deleted from this device and our server.');
 }
 
+// ── Transcript Viewer ─────────────────────────────────────────────────
+function showTranscript() {
+  const messages = [];
+  transcript.querySelectorAll('.msg').forEach(el => {
+    const role = el.classList.contains('interviewer') ? 'Interviewer' :
+                 el.classList.contains('user') ? 'You' : 'System';
+    messages.push(role + ': ' + el.textContent);
+  });
+  const text = messages.join('\n\n');
+
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(42,32,24,.95);display:flex;align-items:center;justify-content:center;padding:24px;';
+  overlay.innerHTML = `
+    <div style="background:var(--card);border-radius:20px;padding:24px;max-width:600px;width:100%;max-height:80vh;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 style="font-family:'Fraunces',serif;font-size:1.3rem;color:var(--ink)">Interview Transcript</h2>
+        <button onclick="this.closest('div').parentElement.parentElement.remove()" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted)">&times;</button>
+      </div>
+      <pre id="transcriptText" style="flex:1;overflow-y:auto;white-space:pre-wrap;font-size:.86rem;color:var(--ink-soft);line-height:1.6;padding:16px;background:var(--paper-2);border-radius:12px;margin:0">${text}</pre>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button onclick="downloadTranscript()" style="padding:10px 20px;border-radius:999px;border:none;background:linear-gradient(180deg,var(--amber),var(--gold));color:#3a2710;font-weight:600;font-size:.88rem;cursor:pointer">Download .txt</button>
+        <button onclick="copyTranscript()" style="padding:10px 20px;border-radius:999px;border:1.5px solid var(--border);background:var(--card);color:var(--ink);font-weight:500;font-size:.88rem;cursor:pointer">Copy</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+}
+
+function downloadTranscript() {
+  const messages = [];
+  transcript.querySelectorAll('.msg').forEach(el => {
+    const role = el.classList.contains('interviewer') ? 'Interviewer' :
+                 el.classList.contains('user') ? 'You' : 'System';
+    messages.push(role + ': ' + el.textContent);
+  });
+  const blob = new Blob([messages.join('\n\n')], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'life-story-interview.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function copyTranscript() {
+  const messages = [];
+  transcript.querySelectorAll('.msg').forEach(el => {
+    const role = el.classList.contains('interviewer') ? 'Interviewer' :
+                 el.classList.contains('user') ? 'You' : 'System';
+    messages.push(role + ': ' + el.textContent);
+  });
+  navigator.clipboard.writeText(messages.join('\n\n')).then(() => {
+    alert('Transcript copied to clipboard');
+  }).catch(() => {
+    alert('Could not copy — try Download instead');
+  });
+}
+
 // ── Data Privacy ───────────────────────────────────────────────────────
 function showPrivacy() {
   const overlay = document.createElement('div');
@@ -734,13 +793,21 @@ document.addEventListener('visibilitychange', () => {
 // Save progress periodically
 setInterval(saveProgress, 5000);
 
-// Add privacy button to controls
+// Add privacy and transcript buttons to controls
 document.addEventListener('DOMContentLoaded', () => {
+  const controls = document.querySelector('.controls');
+
   const privacyBtn = document.createElement('button');
   privacyBtn.className = 'ctrl-btn';
   privacyBtn.textContent = 'Privacy';
   privacyBtn.onclick = showPrivacy;
-  document.querySelector('.controls').appendChild(privacyBtn);
+  controls.appendChild(privacyBtn);
+
+  const transcriptBtn = document.createElement('button');
+  transcriptBtn.className = 'ctrl-btn';
+  transcriptBtn.textContent = 'Transcript';
+  transcriptBtn.onclick = showTranscript;
+  controls.appendChild(transcriptBtn);
 });
 </script>
 </body>
