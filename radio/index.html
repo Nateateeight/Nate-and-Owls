@@ -33,6 +33,10 @@
   #list .b { background:var(--amber); border:0; color:#20160a; font:inherit; font-size:12px; padding:4px 10px; border-radius:18px; cursor:pointer; }
   #list li.playing .b { background:var(--goldhi); }
   .empty { color:#a08b63; font-style:italic; }
+  .sitenav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0 14px;padding:16px 4px;border-top:1px solid #3a2d17;border-bottom:1px solid #3a2d17;}
+  .sitenav a{color:#cbb688;text-decoration:none;font-size:13px;letter-spacing:.05em;padding:6px 13px;border:1px solid #312412;border-radius:18px;transition:border-color .15s,color .15s;}
+  .sitenav a:hover{color:var(--goldhi);border-color:var(--amber);}
+  .sitenav a.here{color:var(--gold);border-color:var(--gold);}
   .foot { margin-top:22px; text-align:center; color:#7d6a47; font-size:12px; font-style:italic; line-height:1.6; }
 </style>
 </head>
@@ -57,6 +61,17 @@
         <ul id="list"><li class="empty">Loading the archive…</li></ul>
       </div>
     </div>
+
+    <nav class="sitenav">
+      <a href="../index.html">Home</a>
+      <a href="../albums/">Albums</a>
+      <a href="../books/">Books</a>
+      <a href="../photos.html">Photos</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../owl/">OWL's Journal</a>
+      <a href="../life-story.html">Life Story</a>
+      <a class="here" href="./">Radio</a>
+    </nav>
 
     <div class="foot">Every episode is kept on the shelf, so your favorite is never lost in the rotation.<br>Drop a topic on the families' porch anytime — the light stays on.</div>
   </div>
