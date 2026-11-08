@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The Porch Light — a warm two-voice radio from a house in the middle of nowhere. Listen live or jump to any episode.">
+<title>The Porch Light — nateandowl radio</title>
+<style>
+  :root { --gold:#e8b45a; --goldhi:#ffd98a; --amber:#c9822d; --ink:#181310; --paper:#f6ead2; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; min-height:100%; background:#0b0a08; color:var(--paper); font-family:Georgia,"Times New Roman",serif; }
+  .stage { max-width:640px; margin:0 auto; padding:36px 22px 60px; }
+  .lamp { width:28px; height:28px; border-radius:50%; margin:0 auto 14px; background:radial-gradient(circle at 45% 40%, var(--goldhi), var(--amber) 72%); box-shadow:0 0 26px 10px rgba(232,180,90,.5); animation:breathe 4.5s ease-in-out infinite; }
+  @keyframes breathe { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
+  .brand { text-align:center; letter-spacing:.32em; text-transform:uppercase; font-size:12px; color:var(--gold); margin-bottom:6px; }
+  h1 { text-align:center; font-weight:normal; font-size:32px; margin:0 0 6px; letter-spacing:.04em; }
+  .kicker { text-align:center; font-style:italic; color:#b9a47f; font-size:14px; margin-bottom:28px; }
+  .live { display:inline-block; background:#1d2b1a; color:#8fd46a; border:1px solid #3c513a; border-radius:20px; padding:5px 12px; font:13px monospace; letter-spacing:.06em; box-shadow:0 0 14px rgba(143,212,106,.18); }
+  .row { display:flex; justify-content:center; margin-bottom:18px; }
+  .now { font-size:13px; color:var(--gold); letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px; }
+  .title { font-size:24px; line-height:1.28; min-height:30px; margin-bottom:14px; }
+  audio { width:100%; margin-bottom:6px; }
+  .meta { display:flex; justify-content:space-between; font-size:12.5px; color:#cbb688; margin-bottom:20px; }
+  .panels { display:flex; flex-direction:column; gap:16px; }
+  .panel { border:1px solid #3a2d17; border-radius:14px; padding:18px; background:linear-gradient(180deg,#191209,#0d0b07); }
+  .panel h2 { margin:0 0 10px; font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); font-weight:normal; }
+  #list { margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; max-height:46vh; overflow:auto; }
+  #list li { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid #312412; border-radius:10px; cursor:pointer; transition:border-color .15s, background .15s; }
+  #list li:hover { border-color:var(--amber); background:#171008; }
+  #list li.playing { border-color:var(--gold); background:rgba(232,180,90,.08); }
+  #list .t { flex:1; line-height:1.25; }
+  #list .d { color:#a08b63; font-size:12px; white-space:nowrap; }
+  #list .b { background:var(--amber); border:0; color:#20160a; font:inherit; font-size:12px; padding:4px 10px; border-radius:18px; cursor:pointer; }
+  #list li.playing .b { background:var(--goldhi); }
+  .empty { color:#a08b63; font-style:italic; }
+  .foot { margin-top:22px; text-align:center; color:#7d6a47; font-size:12px; font-style:italic; line-height:1.6; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="lamp"></div>
+    <div class="brand">The Porch Light</div>
+    <h1>nateandowl radio</h1>
+    <div class="kicker">Two warm voices. A house in the middle of nowhere. The lamp stays lit.</div>
+    <div class="row"><span class="live">● LIVE STATION</span></div>
+
+    <div class="panels">
+      <div class="panel">
+        <div class="now">Now playing</div>
+        <div class="title" id="title">—</div>
+        <audio id="aud" controls preload="metadata"></audio>
+        <div class="meta"><span id="index"></span><span id="elapsed"></span></div>
+      </div>
+
+      <div class="panel">
+        <h2>Episode index — jump to a favorite</h2>
+        <ul id="list"><li class="empty">Loading the archive…</li></ul>
+      </div>
+    </div>
+
+    <div class="foot">Every episode is kept on the shelf, so your favorite is never lost in the rotation.<br>Drop a topic on the families' porch anytime — the light stays on.</div>
+  </div>
+
+<script>
+const aud=document.getElementById('aud'), titleEl=document.getElementById('title'),
+      idxEl=document.getElementById('index'), elEl=document.getElementById('elapsed'),
+      listEl=document.getElementById('list');
+let playlist=[], idx=0, manual=false, skipAdvance=false;
+
+function fmt(s){ if(!isFinite(s)) return '--:--'; s=Math.round(s); return (s/60|0)+':'+String(s%60).padStart(2,'0'); }
+function renderList(){
+  if(!playlist.length){ listEl.innerHTML='<li class="empty">No episodes yet.</li>'; return; }
+  listEl.innerHTML='';
+  playlist.forEach((e,i)=>{
+    const li=document.createElement('li');
+    if(i===idx) li.classList.add('playing');
+    const t=document.createElement('span'); t.className='t'; t.textContent=e.title;
+    const d=document.createElement('span'); d.className='d'; d.textContent=e.duration?fmt(e.duration):'';
+    const b=document.createElement('button'); b.className='b'; b.textContent=i===idx?'playing':'play';
+    li.append(t,d,b);
+    li.addEventListener('click',()=>{ playAt(i,true); });
+    listEl.appendChild(li);
+  });
+}
+function playAt(i, jump){
+  if(!playlist.length) return;
+  idx=((i%playlist.length)+playlist.length)%playlist.length;
+  manual=jump||false; skipAdvance=false;
+  const e=playlist[idx], n=playlist[(idx+1)%playlist.length];
+  titleEl.textContent=e.title;
+  idxEl.textContent=(idx+1)+' / '+playlist.length+(e.duration?('  ·  '+fmt(e.duration)):'');
+  aud.src='episodes/'+e.file+'?v='+Date.now();
+  aud.play().catch(()=>{});
+  renderList();
+}
+aud.addEventListener('ended',()=>{ if(!skipAdvance){ playAt(idx+1,false);} });
+aud.addEventListener('timeupdate',()=>{ elEl.textContent=fmt(aud.currentTime); });
+
+async function refresh(initial){
+  try{
+    const r=await fetch('playlist.json?q='+Date.now());
+    const p=await r.json();
+    if(p && p.length){
+      const had=playlist.length;
+      playlist=p;
+      if(initial || playlist.length>had){ renderList(); if(initial) playAt(0,false); }
+      else renderList();
+    }
+  }catch(e){}
+}
+refresh(true);
+setInterval(()=>refresh(false),15000);
+</script>
+</body>
+</html>
