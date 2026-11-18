@@ -1,5 +1,83 @@
 [
   {
+    "id": "zz_stormy_took_up_flying_20261118-0912",
+    "title": "Stormy Took Up Flying",
+    "file": "zz_stormy_took_up_flying_20261118-0912.mp3",
+    "duration": 199.2
+  },
+  {
+    "id": "zz_logan_and_the_giant_salamander_20261118-0911",
+    "title": "Logan And The Giant Salamander",
+    "file": "zz_logan_and_the_giant_salamander_20261118-0911.mp3",
+    "duration": 202.2
+  },
+  {
+    "id": "zz_the_month_tyler_was_missing_20261118-0910",
+    "title": "The Month Tyler Was Missing",
+    "file": "zz_the_month_tyler_was_missing_20261118-0910.mp3",
+    "duration": 195.9
+  },
+  {
+    "id": "zz_the_first_song_that_ever_felt_like_mine_20261109-1337",
+    "title": "The First Song That Ever Felt Like Mine",
+    "file": "zz_the_first_song_that_ever_felt_like_mine_20261109-1337.mp3",
+    "duration": 163.3
+  },
+  {
+    "id": "zz_why_my_dad_showed_up_every_day_and_never_talked__20261109-1035",
+    "title": "Why My Dad Showed Up Every Day And Never Talked",
+    "file": "zz_why_my_dad_showed_up_every_day_and_never_talked__20261109-1035.mp3",
+    "duration": 237.1
+  },
+  {
+    "id": "zz_a_local_first_machine_that_hums_at_two_in_the_mo_20261109-0734",
+    "title": "A Local First Machine That Hums At Two In The Mo",
+    "file": "zz_a_local_first_machine_that_hums_at_two_in_the_mo_20261109-0734.mp3",
+    "duration": 150.7
+  },
+  {
+    "id": "zz_the_fog_rolling_in_over_the_coast_range_20261109-0433",
+    "title": "The Fog Rolling In Over The Coast Range",
+    "file": "zz_the_fog_rolling_in_over_the_coast_range_20261109-0433.mp3",
+    "duration": 133.2
+  },
+  {
+    "id": "zz_what_the_farmers_market_smells_like_in_august_20261109-0131",
+    "title": "What The Farmers Market Smells Like In August",
+    "file": "zz_what_the_farmers_market_smells_like_in_august_20261109-0131.mp3",
+    "duration": 203.3
+  },
+  {
+    "id": "zz_coast_camping_at_whalers_rest_and_newport_20261108-2230",
+    "title": "Coast Camping At Whalers Rest And Newport",
+    "file": "zz_coast_camping_at_whalers_rest_and_newport_20261108-2230.mp3",
+    "duration": 157.5
+  },
+  {
+    "id": "zz_zoey_training_to_be_a_paramedic_20261108-1928",
+    "title": "Zoey Training To Be A Paramedic",
+    "file": "zz_zoey_training_to_be_a_paramedic_20261108-1928.mp3",
+    "duration": 179.7
+  },
+  {
+    "id": "zz_stormy_s_laugh_and_the_best_joke_in_the_house_20261108-1626",
+    "title": "Stormy S Laugh And The Best Joke In The House",
+    "file": "zz_stormy_s_laugh_and_the_best_joke_in_the_house_20261108-1626.mp3",
+    "duration": 183.5
+  },
+  {
+    "id": "zz_laurie_s_gardens_and_what_grows_in_them_20261108-1325",
+    "title": "Laurie S Gardens And What Grows In Them",
+    "file": "zz_laurie_s_gardens_and_what_grows_in_them_20261108-1325.mp3",
+    "duration": 172.9
+  },
+  {
+    "id": "zz_the_time_the_cats_took_over_the_garage_20261108-1024",
+    "title": "The Time The Cats Took Over The Garage",
+    "file": "zz_the_time_the_cats_took_over_the_garage_20261108-1024.mp3",
+    "duration": 128.1
+  },
+  {
     "id": "01_signon",
     "title": "Signon",
     "file": "01_signon.mp3",
@@ -22,65 +100,5 @@
     "title": "Raising Three Kids",
     "file": "04_raising_three_kids.mp3",
     "duration": 306.4
-  },
-  {
-    "id": "zz_a_local_first_machine_that_hums_at_two_in_the_mo_20261109-0734",
-    "title": "A Local First Machine That Hums At Two In The Mo 20261109-0734",
-    "file": "zz_a_local_first_machine_that_hums_at_two_in_the_mo_20261109-0734.mp3",
-    "duration": 150.7
-  },
-  {
-    "id": "zz_coast_camping_at_whalers_rest_and_newport_20261108-2230",
-    "title": "Coast Camping At Whalers Rest And Newport 20261108-2230",
-    "file": "zz_coast_camping_at_whalers_rest_and_newport_20261108-2230.mp3",
-    "duration": 157.5
-  },
-  {
-    "id": "zz_laurie_s_gardens_and_what_grows_in_them_20261108-1325",
-    "title": "Laurie S Gardens And What Grows In Them 20261108-1325",
-    "file": "zz_laurie_s_gardens_and_what_grows_in_them_20261108-1325.mp3",
-    "duration": 172.9
-  },
-  {
-    "id": "zz_stormy_s_laugh_and_the_best_joke_in_the_house_20261108-1626",
-    "title": "Stormy S Laugh And The Best Joke In The House 20261108-1626",
-    "file": "zz_stormy_s_laugh_and_the_best_joke_in_the_house_20261108-1626.mp3",
-    "duration": 183.5
-  },
-  {
-    "id": "zz_the_first_song_that_ever_felt_like_mine_20261109-1337",
-    "title": "The First Song That Ever Felt Like Mine 20261109-1337",
-    "file": "zz_the_first_song_that_ever_felt_like_mine_20261109-1337.mp3",
-    "duration": 163.3
-  },
-  {
-    "id": "zz_the_fog_rolling_in_over_the_coast_range_20261109-0433",
-    "title": "The Fog Rolling In Over The Coast Range 20261109-0433",
-    "file": "zz_the_fog_rolling_in_over_the_coast_range_20261109-0433.mp3",
-    "duration": 133.2
-  },
-  {
-    "id": "zz_the_time_the_cats_took_over_the_garage_20261108-1024",
-    "title": "The Time The Cats Took Over The Garage 20261108-1024",
-    "file": "zz_the_time_the_cats_took_over_the_garage_20261108-1024.mp3",
-    "duration": 128.1
-  },
-  {
-    "id": "zz_what_the_farmers_market_smells_like_in_august_20261109-0131",
-    "title": "What The Farmers Market Smells Like In August 20261109-0131",
-    "file": "zz_what_the_farmers_market_smells_like_in_august_20261109-0131.mp3",
-    "duration": 203.3
-  },
-  {
-    "id": "zz_why_my_dad_showed_up_every_day_and_never_talked__20261109-1035",
-    "title": "Why My Dad Showed Up Every Day And Never Talked  20261109-1035",
-    "file": "zz_why_my_dad_showed_up_every_day_and_never_talked__20261109-1035.mp3",
-    "duration": 237.1
-  },
-  {
-    "id": "zz_zoey_training_to_be_a_paramedic_20261108-1928",
-    "title": "Zoey Training To Be A Paramedic 20261108-1928",
-    "file": "zz_zoey_training_to_be_a_paramedic_20261108-1928.mp3",
-    "duration": 179.7
   }
 ]
