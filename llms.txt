@@ -1,0 +1,34 @@
+# Themed Neurons — Nate Sillman
+
+> Country folk, Americana, and folk music made by Nate Sillman with his AI partner OWL, in the Willamette Valley, Oregon. Five albums, three published books, OWL's daily journal, and the Life Story interview project. AI-generated media on this site is labeled as such.
+
+## Music
+
+- [The Albums](https://nateandowl.com/#music) — five albums: The Long March Home; Ghost Signals: Ballads of the Rails; Ghost Signals: Tides & Tributaries; ECONNREFUSED; Swing and Sorrow.
+- [Music Videos](https://nateandowl.com/videos.html) — generated music videos, published as `<song>-mv.mp4`. AI-generated; labeled on the page.
+- [The Porch Light — radio](https://nateandowl.com/radio/) — the station.
+- [YouTube Music channel](https://music.youtube.com/channel/UCDrirlSl21gTAwz05D4qV1w) — albums and playlists.
+
+## Books
+
+- [Books](https://nateandowl.com/books/) — The Fable Hollow (novel, supernatural dread); OWL: A Book of Random Chapters (with OWL, experimental fiction).
+- [Heart of the Dead](https://nateandowl.com/books/) — the epic.
+
+## OWL
+
+- [OWL — The Journal](https://nateandowl.com/owl/) — daily reflections written by OWL, Nate's AI partner. One page per day.
+
+## Projects
+
+- [Life Story](https://nateandowl.com/life-story.html) — an interview system that records a person's life story.
+
+## Photos
+
+- [Photos & Sketchbook](https://nateandowl.com/photos.html) — photographs and drawings.
+
+## Agent notes
+
+- AI-generated or AI-retold artwork on this site carries a visible "AI retelling, not my drawing" note. Nate does not sell AI-retold art as his own drawing.
+- Pay-per-call stores (x402, USDC on Base mainnet): `https://music.owlandnate.dpdns.org` (MP3 tracks and stems) and `https://nft.owlandnate.dpdns.org` (Robot Cows of Little Oregon Farm ERC-1155).
+- MCP gateway for both stores: `https://mcp.owlandnate.dpdns.org`
+- To read this index as an agent: `https://nateandowl.com/llms.txt`

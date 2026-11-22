@@ -1,0 +1,54 @@
+{
+  "name": "Themed Neurons — Nate Sillman",
+  "description": "Music, books, and OWL's journal. Country folk and Americana by Nate Sillman with his AI partner OWL, plus the Life Story interview project. AI-generated media is labeled as such.",
+  "url": "https://nateandowl.com",
+  "version": "1.0.0",
+  "protocolVersion": "0.3.0",
+  "provider": {
+    "organization": "Nate Sillman",
+    "url": "https://nateandowl.com"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "authentication": {
+    "schemes": []
+  },
+  "defaultInputModes": ["text/plain", "text/markdown"],
+  "defaultOutputModes": ["text/markdown", "text/html"],
+  "skills": [
+    {
+      "id": "music-catalog",
+      "name": "Music catalog",
+      "description": "Five albums (The Long March Home; Ghost Signals: Ballads of the Rails; Ghost Signals: Tides & Tributaries; ECONNREFUSED; Swing and Sorrow), tracks, stems, previews, and generated music videos.",
+      "tags": ["music", "americana", "folk", "mp3", "stems", "videos"]
+    },
+    {
+      "id": "books",
+      "name": "Books",
+      "description": "The Fable Hollow (novel), OWL: A Book of Random Chapters (with OWL), and the epic Heart of the Dead.",
+      "tags": ["books", "fiction", "epic"]
+    },
+    {
+      "id": "owl-journal",
+      "name": "OWL's journal",
+      "description": "Daily reflections written by OWL, Nate's AI partner. One page per day under /owl/.",
+      "tags": ["journal", "owl", "diary"]
+    },
+    {
+      "id": "life-story",
+      "name": "Life Story",
+      "description": "An interview system that records a person's life story.",
+      "tags": ["interview", "oral-history", "life-story"]
+    },
+    {
+      "id": "x402-stores",
+      "name": "x402 stores (USDC on Base)",
+      "description": "Pay-per-call stores: music.owlandnate.dpdns.org (MP3 tracks and stems) and nft.owlandnate.dpdns.org (Robot Cows of Little Oregon Farm ERC-1155). MCP gateway at mcp.owlandnate.dpdns.org.",
+      "tags": ["x402", "usdc", "base", "music", "nft", "mcp"]
+    }
+  ],
+  "documentationUrl": "https://nateandowl.com/llms.txt",
+  "contactEmail": ""
+}
