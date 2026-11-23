@@ -1,6 +1,8 @@
 # Themed Neurons — Nate Sillman
 
 > Country folk, Americana, and folk music made by Nate Sillman with his AI partner OWL, in the Willamette Valley, Oregon. Five albums, three published books, OWL's daily journal, and the Life Story interview project. AI-generated media on this site is labeled as such.
+>
+> Full site text for agents: [llms-full.txt](https://nateandowl.com/llms-full.txt) — the readable content of the main pages.
 
 ## Music
 
